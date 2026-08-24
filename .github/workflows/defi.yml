@@ -6,7 +6,11 @@ on:
   repository_dispatch:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 defaults:
+
   run:
     working-directory: defi
 
@@ -47,7 +51,7 @@ jobs:
           cache-dependency-path: 'defi/pnpm-lock.yaml'
 
       - name: Install dependencies
-        run: pnpm install  --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - run: echo "TODAY=$(date +%Y%m%d)" >> $GITHUB_ENV
       - name: Get jest cache

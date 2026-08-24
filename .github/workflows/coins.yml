@@ -4,7 +4,11 @@ on:
   push:
     branches: [ master ]
 
+permissions:
+  contents: read
+
 defaults:
+
   run:
     working-directory: coins
 
@@ -45,7 +49,7 @@ jobs:
           cache-dependency-path: 'coins/pnpm-lock.yaml'
 
       - name: Install dependencies
-        run: pnpm install  --no-frozen-lockfile && ln -s ../coins/node_modules/ ../defi/node_modules
+        run: pnpm install --frozen-lockfile && ln -s ../coins/node_modules/ ../defi/node_modules
 
       - name: Deploy infrastructure stack
         run: pnpm run deploy:prod
